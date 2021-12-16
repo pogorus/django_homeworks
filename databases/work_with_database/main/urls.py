@@ -1,5 +1,4 @@
 """main URL Configuration
-
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/2.1/topics/http/urls/
 Examples:
@@ -20,6 +19,7 @@ import phones.views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('catalog/', phones.views.show_catalog),
-    path('catalog/<slug:slug>/', phones.views.show_product),
+    path('', phones.views.index),
+    path('catalog/', phones.views.show_catalog, name='catalog'),
+    path('catalog/<slug:slug>/', phones.views.show_product, name='phone'),
 ]
