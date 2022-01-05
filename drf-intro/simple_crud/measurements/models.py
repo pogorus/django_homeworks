@@ -1,28 +1,15 @@
 from django.db import models
 
 
-class Project(models.Model):
-    """Объект на котором проводят измерения."""
+class Sensor(models.Model):
 
-    name = models.TextField()
-    latitude = models.FloatField()
-    longitude = models.FloatField()
-    created_at = models.DateTimeField(
-        auto_now_add=True
-    )
-    updated_at = models.DateTimeField(
-        auto_now=True
-    )
+    name = models.CharField(max_length=50)
+    description = models.TextField()
 
 
 class Measurement(models.Model):
-    """Измерение температуры на объекте."""
 
+    sensor = models.ForeignKey(Sensor, on_delete=models.CASCADE, related_name='measurements')
     value = models.FloatField()
-    project = models.ForeignKey(Project, on_delete=models.CASCADE)
-    created_at = models.DateTimeField(
-        auto_now_add=True
-    )
-    updated_at = models.DateTimeField(
-        auto_now=True
-    )
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
