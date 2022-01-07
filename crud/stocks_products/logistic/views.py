@@ -5,6 +5,10 @@ from logistic.models import Product, Stock
 from logistic.serializers import ProductSerializer, StockSerializer
 
 
+class CustomSearchFilter(SearchFilter):
+    search_param = 'products'
+
+
 class ProductViewSet(ModelViewSet):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
@@ -15,5 +19,5 @@ class ProductViewSet(ModelViewSet):
 class StockViewSet(ModelViewSet):
     queryset = Stock.objects.all()
     serializer_class = StockSerializer
-    filter_backends = [SearchFilter]
+    filter_backends = [CustomSearchFilter]
     search_fields = ['products__title', 'products__description']
